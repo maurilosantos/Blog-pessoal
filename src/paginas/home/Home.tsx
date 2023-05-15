@@ -19,7 +19,7 @@ function Home() {
                     </Box>
                 </Grid>
                 <Grid item xs={6} >
-                    <img src="https://img.freepik.com/free-vector/welcome-concept-illustration_114360-380.jpg?w=740&t=st=1684109288~exp=1684109888~hmac=3d08785ac518d0a1ed4fe51f3b91a8a07a96c26d33a0147340d570dabae60852" alt="" width="500px" height="500px" />
+                    <img src="../../assets/home.svg" alt="" width="500px" height="500px" />
                 </Grid>
                 <Grid xs={12} style={{ backgroundColor: "white" }}>
                 </Grid>
