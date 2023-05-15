@@ -37,7 +37,7 @@ function Navbar() {
 
     return (
         <>
-            <AppBar position="static">
+            <AppBar position="static" style={{backgroundColor: "#595b5a"}}>
                 <Container maxWidth="xl">
                     <Toolbar disableGutters>
                         <Diversity1Icon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
