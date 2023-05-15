@@ -11,7 +11,7 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
-import AdbIcon from '@mui/icons-material/Adb';
+import Diversity1Icon from '@mui/icons-material/Diversity1';
 
 const pages = ['Início', 'Postagens', 'Temas', 'Cadastrar Tema'];
 const settings = ['Perfil', 'Conta', 'Visão Geral', 'Sair'];
@@ -40,7 +40,7 @@ function Navbar() {
             <AppBar position="static">
                 <Container maxWidth="xl">
                     <Toolbar disableGutters>
-                        <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
+                        <Diversity1Icon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
                         <Typography
                             variant="h6"
                             noWrap
@@ -89,13 +89,13 @@ function Navbar() {
                                 }}
                             >
                                 {pages.map((page) => (
-                                    <MenuItem key={page} onClick={handleCloseNavMenu}>
+                                    <MenuItem key={page} style={{display: "block", margin: "10px"}} onClick={handleCloseNavMenu}>
                                         <Typography textAlign="center">{page}</Typography>
                                     </MenuItem>
                                 ))}
                             </Menu>
                         </Box>
-                        <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
+                    
                         <Typography
                             variant="h5"
                             noWrap
@@ -119,7 +119,8 @@ function Navbar() {
                                 <Button
                                     key={page}
                                     onClick={handleCloseNavMenu}
-                                    sx={{ my: 2, color: 'white', display: 'block' }}
+                                    sx={{ my: 2, color: '#ffff', display: 'block' }}
+                                    style={{color:"#ffff"}}
                                 >
                                     {page}
                                 </Button>
@@ -129,7 +130,7 @@ function Navbar() {
                         <Box sx={{ flexGrow: 0 }}>
                             <Tooltip title="Open settings">
                                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                                    <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+                                <Avatar alt="Cindy Baker" src="https://media.licdn.com/dms/image/C4D03AQFdlK6-d7blgg/profile-displayphoto-shrink_800_800/0/1652486506638?e=1689811200&v=beta&t=mj2Tz4egbmgZOC-MT9aAbKR8e2uZFcCjwUfy0vESZ7I" />
                                 </IconButton>
                             </Tooltip>
                             <Menu
@@ -149,7 +150,7 @@ function Navbar() {
                                 onClose={handleCloseUserMenu}
                             >
                                 {settings.map((setting) => (
-                                    <MenuItem key={setting} onClick={handleCloseUserMenu}>
+                                    <MenuItem key={setting} style={{display: "block", margin: "10px"}} onClick={handleCloseUserMenu}>
                                         <Typography textAlign="center">{setting}</Typography>
                                     </MenuItem>
                                 ))}
