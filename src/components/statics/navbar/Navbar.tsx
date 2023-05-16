@@ -12,13 +12,31 @@ import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import Diversity1Icon from '@mui/icons-material/Diversity1';
+import { Link } from 'react-router-dom';
+
 
 const pages = ['Início', 'Postagens', 'Temas', 'Cadastrar Tema'];
-const settings = ['Perfil', 'Conta', 'Visão Geral', 'Sair'];
+// const settings = ['Perfil', 'Conta', 'Visão Geral', 'Sair'];
+// Breve: fazer o mesmo pra pages quando for fazer a rota.
+const settings = [
+    {
+        nome: 'Perfil',
+        link: '/'
+    },
+    {
+        nome: 'Conta',
+        link: '/'
+    },
+    {
+        nome: 'Sair',
+        link: '/login'
+    },
+]
 
 function Navbar() {
     const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
     const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);
+    
 
     const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
         setAnchorElNav(event.currentTarget);
@@ -130,7 +148,7 @@ function Navbar() {
                         <Box sx={{ flexGrow: 0 }}>
                             <Tooltip title="Open settings">
                                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                                <Avatar alt="Cindy Baker" src="https://media.licdn.com/dms/image/C4D03AQFdlK6-d7blgg/profile-displayphoto-shrink_800_800/0/1652486506638?e=1689811200&v=beta&t=mj2Tz4egbmgZOC-MT9aAbKR8e2uZFcCjwUfy0vESZ7I" />
+                                <Avatar alt="Foto Perfil" src="https://media.licdn.com/dms/image/C4D03AQFdlK6-d7blgg/profile-displayphoto-shrink_800_800/0/1652486506638?e=1689811200&v=beta&t=mj2Tz4egbmgZOC-MT9aAbKR8e2uZFcCjwUfy0vESZ7I" />
                                 </IconButton>
                             </Tooltip>
                             <Menu
@@ -150,8 +168,10 @@ function Navbar() {
                                 onClose={handleCloseUserMenu}
                             >
                                 {settings.map((setting) => (
-                                    <MenuItem key={setting} style={{display: "block", margin: "10px"}} onClick={handleCloseUserMenu}>
-                                        <Typography textAlign="center">{setting}</Typography>
+                                    <MenuItem key={setting.nome} style={{display: "block", margin: "10px"}} onClick={handleCloseUserMenu}>
+                                        <Link to={setting.link} style={{ textDecoration: 'none' }}>
+                                        <Typography textAlign="center">{setting.nome}</Typography>
+                                        </Link>
                                     </MenuItem>
                                 ))}
                             </Menu>
