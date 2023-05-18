@@ -4,7 +4,7 @@ import { Box, Button, Grid, TextField, Typography } from '@mui/material';
 import { Link, useNavigate } from 'react-router-dom';
 import { UsuarioLogin } from '../../model/UsuarioLogin';
 import useLocalStorage from 'react-use-localstorage';
-import { api } from '../../services/Service';
+import { login } from '../../services/Service';
 
 function Login() {
 
@@ -35,8 +35,7 @@ function Login() {
     async function onSubmit(e: ChangeEvent<HTMLFormElement>) {
         e.preventDefault();
         try {
-            const resposta = await api.post(`/usuarios/logar`, usuarioLogin)
-            setToken(resposta.data.token)
+            await login(`/usuarios/logar`, usuarioLogin, setToken)
 
             alert('Usuário logado com sucesso!');
         } catch (error) {
