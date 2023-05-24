@@ -3,7 +3,7 @@ import { Typography, Grid, Button } from '@material-ui/core';
 import { Box } from '@mui/material';
 import './Home.css';
 import TabPostagem from "../../components/postagens/tabpostagem/TabPostagem";
-import ModalPostagem from "../../components/postagens/modalPostagem/modalPostagem";
+import ModalPostagem from "../../components/postagens/modalPostagem/ModalPostagem";
 import { useNavigate } from "react-router-dom";
 import useLocalStorage from "react-use-localstorage";
 
