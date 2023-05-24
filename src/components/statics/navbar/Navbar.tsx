@@ -12,10 +12,11 @@ import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import Diversity1Icon from '@mui/icons-material/Diversity1';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import useLocalStorage from "react-use-localstorage";
 
 
-const pages = ['Início', 'Postagens', 'Temas', 'Cadastrar Tema'];
+// const pages = ['Início', 'Postagens', 'Temas', 'Cadastrar Tema'];
 // const settings = ['Perfil', 'Conta', 'Visão Geral', 'Sair'];
 // Breve: fazer o mesmo pra pages quando for fazer a rota.
 const settings = [
@@ -28,9 +29,28 @@ const settings = [
         link: '/'
     },
     {
-        nome: 'Sair',
-        link: '/login'
+        nome: 'Recomendações',
+        link: '/'
+    }
+]
+
+const pages = [
+    {
+        nome: 'Inicio',
+        link: '/home'
     },
+    {
+        nome: 'Postagens',
+        link: '/postagens'
+    },
+    {
+        nome: 'Temas',
+        link: '/temas'
+    },
+    {
+        nome: 'Cadastrar Tema',
+        link: '/formularioTema'
+    }
 ]
 
 function Navbar() {
@@ -52,6 +72,14 @@ function Navbar() {
     const handleCloseUserMenu = () => {
         setAnchorElUser(null);
     };
+
+    const [token, setToken] = useLocalStorage('token');
+    let navigate = useNavigate();
+        function goLogout(){
+            setToken('')
+            alert("Usuário deslogado")
+            navigate('/login')
+        }
 
     return (
         <>
@@ -107,8 +135,10 @@ function Navbar() {
                                 }}
                             >
                                 {pages.map((page) => (
-                                    <MenuItem key={page} style={{display: "block", margin: "10px"}} onClick={handleCloseNavMenu}>
-                                        <Typography textAlign="center">{page}</Typography>
+                                    <MenuItem key={page.nome} style={{display: "block", margin: "10px"}} onClick={handleCloseNavMenu}>
+                                        <Link to={page.link} className="text-decorator-none">
+                                            <Typography textAlign="center" color="inherit" style={{ color: 'black' }}>{page.nome}</Typography>
+                                        </Link>
                                     </MenuItem>
                                 ))}
                             </Menu>
@@ -135,12 +165,14 @@ function Navbar() {
                         <Box gap={2} sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
                             {pages.map((page) => (
                                 <Button
-                                    key={page}
+                                    key={page.nome}
                                     onClick={handleCloseNavMenu}
                                     sx={{ my: 2, color: '#ffff', display: 'block' }}
                                     style={{color:"#ffff"}}
                                 >
-                                    {page}
+                                    <Link to={page.link} className="text-decorator-none">
+                                        <Typography textAlign="center" color="inherit" style={{ color: 'white' }}>{page.nome}</Typography>
+                                    </Link>
                                 </Button>
                             ))}
                         </Box>
@@ -169,11 +201,14 @@ function Navbar() {
                             >
                                 {settings.map((setting) => (
                                     <MenuItem key={setting.nome} style={{display: "block", margin: "10px"}} onClick={handleCloseUserMenu}>
-                                        <Link to={setting.link} style={{ textDecoration: 'none' }}>
-                                        <Typography textAlign="center">{setting.nome}</Typography>
+                                        <Link to={setting.link} className="text-decorator-none">
+                                            <Typography textAlign="center" color="inherit" style={{ color: 'black' }}>{setting.nome}</Typography>
                                         </Link>
                                     </MenuItem>
                                 ))}
+                                <MenuItem style={{display: "block", margin: "10px"}}>
+                                <Typography onClick={goLogout} textAlign="center" color="inherit" style={{ color: 'black'}}>Sair</Typography>
+                                </MenuItem>   
                             </Menu>
                         </Box>
                     </Toolbar>
