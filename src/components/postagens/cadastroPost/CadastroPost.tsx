@@ -7,6 +7,7 @@ import Postagem from '../../../model/Postagem';
 import { busca, buscaId, post, put } from '../../../services/Service';
 import { useSelector } from 'react-redux';
 import { TokenState } from '../../../store/tokens/tokensReducer';
+import Usuario from '../../../model/Usuario';
 
 function CadastroPost() {
     let navigate = useNavigate();
@@ -15,6 +16,17 @@ function CadastroPost() {
     const token = useSelector<TokenState, TokenState["tokens"]>(
         (state) => state.tokens
     );
+    // buscando o id dentro do REDUX
+    const userId = useSelector<TokenState, TokenState['id']>(
+        (state) => state.id
+    )
+    const [usuario, setUsuario] = useState<Usuario>({
+        id: +userId,
+        nome: '',
+        usuario: '',
+        senha: '',
+        foto: ''
+    })
 
     useEffect(() => {
         if (token == "") {
@@ -33,14 +45,17 @@ function CadastroPost() {
         id: 0,
         titulo: '',
         texto: '',
-        tema: null
-    })
+        data: '',
+        tema: null,
+        usuario: null // dono da postagem
+    });
 
     useEffect(() => { 
         setPostagem({
             ...postagem,
-            tema: tema
-        })
+            tema: tema,
+            usuario: usuario 
+        });
     }, [tema])
 
     useEffect(() => {

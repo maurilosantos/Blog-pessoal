@@ -5,7 +5,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { UsuarioLogin } from '../../model/UsuarioLogin';
 import { login } from '../../services/Service';
 import { useDispatch } from 'react-redux';
-import { addToken } from '../../store/tokens/actions';
+import { addId, addToken } from '../../store/tokens/actions';
 
 function Login() {
 
@@ -13,6 +13,15 @@ function Login() {
     const dispatch = useDispatch();
     const [token, setToken] = useState('');
     const [usuarioLogin, setUsuarioLogin] = useState<UsuarioLogin>({
+        id: 0,
+        nome: '',
+        usuario: '',
+        senha: '',
+        foto: '',
+        token: ''
+    })
+
+    const [respUserLogin, setRespUserLogin] = useState<UsuarioLogin>({
         id: 0,
         nome: '',
         usuario: '',
@@ -38,13 +47,21 @@ function Login() {
     async function onSubmit(e: ChangeEvent<HTMLFormElement>) {
         e.preventDefault();
         try {
-            await login(`/usuarios/logar`, usuarioLogin, setToken)
-
-            alert('Usuário logado com sucesso!');
+            await login(`/usuarios/logar`, usuarioLogin, setRespUserLogin);
+        
+            alert('Usuário logado com sucesso! <3');
         } catch (error) {
-            alert('Dados do usuário inconsistentes. Erro ao logar!');
+            alert('Dados do usuário inconsistentes. Erro ao logar! :(');
         }
     }
+
+    useEffect(()=>{
+        if(respUserLogin.token !== ''){
+            dispatch(addToken(respUserLogin.token))
+            dispatch(addId(respUserLogin.id.toString()))
+            navigate('/home')
+        }
+    }, [respUserLogin.token])
 
     return (
         <>
