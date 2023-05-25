@@ -13,7 +13,8 @@ import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import Diversity1Icon from '@mui/icons-material/Diversity1';
 import { Link, useNavigate } from 'react-router-dom';
-import useLocalStorage from "react-use-localstorage";
+import { useSelector } from "react-redux";
+import { TokenState } from "../../../store/tokens/tokensReducer";
 
 
 // const pages = ['Início', 'Postagens', 'Temas', 'Cadastrar Tema'];
@@ -73,10 +74,11 @@ function Navbar() {
         setAnchorElUser(null);
     };
 
-    const [token, setToken] = useLocalStorage('token');
+    const token = useSelector<TokenState, TokenState["tokens"]>(
+        (state) => state.tokens
+    );
     let navigate = useNavigate();
         function goLogout(){
-            setToken('')
             alert("Usuário deslogado")
             navigate('/login')
         }

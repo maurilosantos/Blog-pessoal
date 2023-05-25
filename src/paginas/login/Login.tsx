@@ -3,13 +3,15 @@ import './Login.css';
 import { Box, Button, Grid, TextField, Typography } from '@mui/material';
 import { Link, useNavigate } from 'react-router-dom';
 import { UsuarioLogin } from '../../model/UsuarioLogin';
-import useLocalStorage from 'react-use-localstorage';
 import { login } from '../../services/Service';
+import { useDispatch } from 'react-redux';
+import { addToken } from '../../store/tokens/actions';
 
 function Login() {
 
     let navigate = useNavigate();
-    const [token, setToken] = useLocalStorage('token');
+    const dispatch = useDispatch();
+    const [token, setToken] = useState('');
     const [usuarioLogin, setUsuarioLogin] = useState<UsuarioLogin>({
         id: 0,
         nome: '',
@@ -28,6 +30,7 @@ function Login() {
 
     useEffect(() => {
         if (token != '') {
+            dispatch(addToken(token));
             navigate('/home')
         }
     }, [token])
