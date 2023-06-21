@@ -21,6 +21,7 @@ function CadastroPost() {
     const userId = useSelector<TokenState, TokenState['id']>(
         (state) => state.id
     )
+    // state que vai controlar o usuário que será inserido na postagem
     const [usuario, setUsuario] = useState<Usuario>({
         id: +userId,
         nome: '',
@@ -64,7 +65,7 @@ function CadastroPost() {
         setPostagem({
             ...postagem,
             tema: tema,
-            usuario: usuario 
+            usuario: usuario // adiciona o usuário dentro da postagem que está sendo enviada para o backend
         });
     }, [tema])
 
