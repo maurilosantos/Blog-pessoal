@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import React, { useEffect, useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import { Card, CardActions, CardContent, Button, Typography } from '@material-ui/core';
-import { Box } from '@mui/material';
+import { Box, Grid } from '@mui/material';
 import './ListaPostagem.css';
 import Postagem from '../../../model/Postagem';
 import { busca } from '../../../services/Service';
@@ -10,48 +10,44 @@ import { TokenState } from '../../../store/tokens/tokensReducer';
 import { toast } from 'react-toastify';
 
 function ListaPostagem() {
-  const [posts, setPosts] = useState<Postagem[]>([])
+  const [posts, setPosts] = useState<Postagem[]>([]);
   let navigate = useNavigate();
-  const token = useSelector<TokenState, TokenState["tokens"]>(
-    (state) => state.tokens
-  );
+  const token = useSelector<TokenState, TokenState['tokens']>((state) => state.tokens);
+
   useEffect(() => {
-    if (token == "") {
+    if (token === '') {
       toast.warn('Você precisa estar logado!', {
-        position: "top-right",
+        position: 'top-right',
         autoClose: 2000,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: true,
         draggable: true,
         progress: undefined,
-        theme: "colored",
-        });
-      navigate("/login")
-
+        theme: 'colored',
+      });
+      navigate('/login');
     }
-  }, [token])
+  }, [token]);
 
   async function getPost() {
-    await busca("/postagens", setPosts, {
+    await busca('/postagens', setPosts, {
       headers: {
-        'Authorization': token
-      }
-    })
+        Authorization: token,
+      },
+    });
   }
 
   useEffect(() => {
-
-    getPost()
-
-  }, [posts.length])
+    getPost();
+  }, [posts.length]);
 
   return (
-    <>
-      {
-        posts.map(post => (
-          <Box m={2} >
-            <Card variant="outlined">
+    <Box m={2}>
+      <Grid container spacing={2}>
+        {posts.map((post) => (
+          <Grid item xs={12} sm={6} md={4} key={post.id}>
+            <Card variant="outlined" >
               <CardContent>
                 <Typography color="textSecondary" gutterBottom>
                   Postagens
@@ -68,21 +64,19 @@ function ListaPostagem() {
                 <Typography variant="body2" component="p">
                   Postado por: {post.usuario?.nome}
                 </Typography>
-
               </CardContent>
               <CardActions>
                 <Box display="flex" justifyContent="center" mb={1.5}>
-
-                  <Link to={`/formularioPostagem/${post.id}`} className="text-decorator-none" >
+                  <Link to={`/formularioPostagem/${post.id}`} className="text-decorator-none">
                     <Box mx={1}>
-                      <Button variant="contained" className="marginLeft" size='small' color="primary" >
+                      <Button variant="contained" className="marginLeft" size="small" color="primary">
                         atualizar
                       </Button>
                     </Box>
                   </Link>
                   <Link to={`/deletarPostagem/${post.id}`} className="text-decorator-none">
                     <Box mx={1}>
-                      <Button variant="contained" size='small' color="secondary">
+                      <Button variant="contained" size="small" color="secondary">
                         deletar
                       </Button>
                     </Box>
@@ -90,11 +84,11 @@ function ListaPostagem() {
                 </Box>
               </CardActions>
             </Card>
-          </Box>
-        ))
-      }
-    </>
-  )
+          </Grid>
+        ))}
+      </Grid>
+    </Box>
+  );
 }
 
 export default ListaPostagem;
