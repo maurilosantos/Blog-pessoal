@@ -92,7 +92,7 @@ function Login() {
                             <TextField id='senha' label='senha' variant='outlined' name='senha' margin='normal' type='password' fullWidth value={usuarioLogin.senha} onChange={(event: ChangeEvent<HTMLInputElement>) => updateModel(event)} > </TextField>
                             <Box marginTop={2} textAlign={'center'}>
 
-                                <Button type='submit' variant='contained' color='primary' >
+                                <Button className='btn' type='submit' variant='contained' color='primary' >
                                     Logar
                                 </Button>
 

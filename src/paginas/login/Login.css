@@ -1,6 +1,11 @@
 .imageLogin{
-    background-image: url(https://img-9gag-fun.9cache.com/photo/aYo1qP2_460s.jpg);
+    background-image: url(https://raw.githubusercontent.com/maurilosantos/frontBlog/ab05ebfa1624bb9ccc3f2bcef7bdfe0359c1480f/src/assets/login.png);
     min-height: 100vh;
     background-repeat: no-repeat;
     background-size: cover;
+}
+
+.btn{
+    background-color:  #438960!important;
+    
 }
