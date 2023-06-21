@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -11,32 +11,25 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
-import Diversity1Icon from '@mui/icons-material/Diversity1';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from "react-redux";
 import { TokenState } from "../../../store/tokens/tokensReducer";
 import { addToken } from "../../../store/tokens/actions";
 import { toast } from "react-toastify";
-
+import './Navbar.css'
+import Usuario from "../../../model/Usuario";
+import NotificationsNoneTwoToneIcon from '@mui/icons-material/NotificationsNoneTwoTone';
 
 const settings = [
     {
         nome: 'Perfil',
         link: '/perfil'
-    },
-    {
-        nome: 'Conta',
-        link: '/'
-    },
-    {
-        nome: 'Recomendações',
-        link: '/'
     }
 ]
 
 const pages = [
     {
-        nome: 'Inicio',
+        nome: 'Início',
         link: '/home'
     },
     {
@@ -51,12 +44,31 @@ const pages = [
         nome: 'Cadastrar Tema',
         link: '/formularioTema'
     }
+
+]
+
+const Inicialpages = [
+    {
+        nome: 'Início',
+        link: '/'
+    },
+    {
+        nome: 'Sobre Nós',
+        link: '/sobre'
+    },
+    {
+        nome: 'Contato',
+        link: '/'
+    }
+
 ]
 
 function Navbar() {
+
     const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
     const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);
-
+    const location = useLocation();
+    const currentUrl = location.pathname;
 
     const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
         setAnchorElNav(event.currentTarget);
@@ -76,6 +88,12 @@ function Navbar() {
     const token = useSelector<TokenState, TokenState["tokens"]>(
         (state) => state.tokens
     );
+
+    const userId = useSelector<TokenState, TokenState['id']>((state) => state.id)
+    const [usuarios, setUsuarios] = useState<Usuario[]>([])
+
+
+
     const dispatch = useDispatch();
     let navigate = useNavigate();
 
@@ -90,35 +108,18 @@ function Navbar() {
             draggable: true,
             progress: undefined,
             theme: "colored",
-            });
-        navigate('/login')
+        });
+        navigate('/')
     }
 
     var navbarComponent;
 
     if (token != "") {
 
-        navbarComponent = <AppBar position="static" style={{ backgroundColor: "#595b5a" }}>
+        navbarComponent = <AppBar position="static" style={{ backgroundColor: "#ffffff", boxShadow: 'none' }}>
             <Container maxWidth="xl">
-                <Toolbar disableGutters>
-                    <Diversity1Icon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
-                    <Typography
-                        variant="h6"
-                        noWrap
-                        component="a"
-                        href="/"
-                        sx={{
-                            mr: 2,
-                            display: { xs: 'none', md: 'flex' },
-                            fontFamily: 'monospace',
-                            fontWeight: 700,
-                            letterSpacing: '.3rem',
-                            color: 'inherit',
-                            textDecoration: 'none',
-                        }}
-                    >
-                        Blog Pessoal
-                    </Typography>
+                <Toolbar disableGutters style={{ color: 'black' }}>
+
 
                     <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
                         <IconButton
@@ -174,10 +175,16 @@ function Navbar() {
                             color: 'inherit',
                             textDecoration: 'none',
                         }}
+                        style={{ color: '#1b1ee9' }}
                     >
                         Blog Pessoal
                     </Typography>
-                    <Box gap={2} sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
+                    <Box gap={1} sx={{
+                        display: { xs: 'none', md: 'flex' },
+                        justifyContent: 'center', // Centraliza horizontalmente os itens
+                        alignItems: 'center', // Centraliza verticalmente os itens
+                        width: '100%'
+                    }}>
                         {pages.map((page) => (
                             <Button
                                 key={page.nome}
@@ -186,18 +193,23 @@ function Navbar() {
                                 style={{ color: "#ffff" }}
                             >
                                 <Link to={page.link} className="text-decorator-none">
-                                    <Typography textAlign="center" color="inherit" style={{ color: 'white' }}>{page.nome}</Typography>
+                                    <Typography textAlign="center" color="inherit" style={{ color: 'black' }}>{page.nome}</Typography>
                                 </Link>
                             </Button>
                         ))}
+
                     </Box>
 
+                    <NotificationsNoneTwoToneIcon style={{ marginRight: 10}} />
+
                     <Box sx={{ flexGrow: 0 }}>
-                        <Tooltip title="Open settings">
+
+                        <Tooltip title="Abra configurações">
                             <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                                <Avatar alt="Foto Perfil" src="https://media.licdn.com/dms/image/C4D03AQFdlK6-d7blgg/profile-displayphoto-shrink_800_800/0/1652486506638?e=1689811200&v=beta&t=mj2Tz4egbmgZOC-MT9aAbKR8e2uZFcCjwUfy0vESZ7I" />
+                                <Avatar alt="Foto Perfil" src={''} />
                             </IconButton>
                         </Tooltip>
+
                         <Menu
                             sx={{ mt: '45px' }}
                             id="menu-appbar"
@@ -231,12 +243,127 @@ function Navbar() {
         </AppBar>
 
 
+    } else if (currentUrl == '/login' || currentUrl == '/cadastro') {
+
+        navbarComponent = (null)
+
+    } else {
+        navbarComponent = <AppBar position="static" style={{ backgroundColor: "#ffffff", boxShadow: 'none' }}>
+            <Container >
+                <Toolbar disableGutters style={{ color: 'black' }}>
+
+                    <Typography
+                        variant="h6"
+                        noWrap
+                        component="a"
+                        href="/"
+                        sx={{
+                            mr: 2,
+                            display: { xs: 'none', md: 'flex' },
+                            fontFamily: 'monospace',
+                            fontWeight: 700,
+                            letterSpacing: '.3rem',
+                            color: 'inherit',
+                            textDecoration: 'none',
+                        }}
+                        style={{ color: '#527146' }}
+                    >
+                        <img src="" />
+                    </Typography>
+
+                    <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
+                        <IconButton
+                            size="large"
+                            aria-label="account of current user"
+                            aria-controls="menu-appbar"
+                            aria-haspopup="true"
+                            onClick={handleOpenNavMenu}
+                            color="inherit"
+                        >
+                            <MenuIcon />
+                        </IconButton>
+                        <Menu
+                            id="menu-appbar"
+                            anchorEl={anchorElNav}
+                            anchorOrigin={{
+                                vertical: 'bottom',
+                                horizontal: 'left',
+                            }}
+                            keepMounted
+                            transformOrigin={{
+                                vertical: 'top',
+                                horizontal: 'left',
+                            }}
+                            open={Boolean(anchorElNav)}
+                            onClose={handleCloseNavMenu}
+                            sx={{
+                                display: { xs: 'block', md: 'none' },
+                            }}
+                        >
+                            {Inicialpages.map((page) => (
+                                <MenuItem key={page.nome} style={{ display: "block", margin: "10px" }} onClick={handleCloseNavMenu}>
+                                    <Link to={page.link} className="text-decorator-none">
+                                        <Typography textAlign="center" color="inherit" style={{ color: 'black' }}>{page.nome}</Typography>
+                                    </Link>
+                                </MenuItem>
+                            ))}
+                        </Menu>
+                    </Box>
+
+                    <Typography
+                        variant="h5"
+                        noWrap
+                        component="a"
+                        href=""
+                        sx={{
+                            mr: 2,
+                            display: { xs: 'flex', md: 'none' },
+                            flexGrow: 1,
+                            fontFamily: 'monospace',
+                            fontWeight: 700,
+                            letterSpacing: '.3rem',
+                            color: 'inherit',
+                            textDecoration: 'none',
+                        }}
+                        style={{ color: '#1b1ee9' }}
+                    >
+                        Blog Pessoal
+                    </Typography>
+                    <Box
+                        sx={{
+
+                            display: { xs: 'none', md: 'flex' },
+                            justifyContent: 'center', // Centraliza horizontalmente os itens
+                            alignItems: 'center', // Centraliza verticalmente os itens
+                            width: '100%'
+
+                        }}>
+                        {Inicialpages.map((page) => (
+                            <Button
+                                className="navbar-inicial"
+                                key={page.nome}
+                                onClick={handleCloseNavMenu}
+                                sx={{ color: '#ffff', display: 'block' }}
+                                style={{ color: "#ffff" }}
+                            >
+                                <Link to={page.link} className="text-decorator-none">
+                                    <Typography textAlign="center" alignItems={'center'} color="inherit" style={{ color: 'black' }}>{page.nome}</Typography>
+                                </Link>
+                            </Button>
+                        ))}
+                    </Box>
+
+
+                </Toolbar>
+            </Container>
+        </AppBar>
     }
 
     return (
         <>
             {navbarComponent}
         </>
+
     )
 };
 
