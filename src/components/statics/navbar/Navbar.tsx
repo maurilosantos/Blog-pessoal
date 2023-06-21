@@ -22,7 +22,7 @@ import { toast } from "react-toastify";
 const settings = [
     {
         nome: 'Perfil',
-        link: '/'
+        link: '/perfil'
     },
     {
         nome: 'Conta',
