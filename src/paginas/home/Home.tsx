@@ -33,18 +33,18 @@ function Home() {
     }, [token])
     return (
         < >
-            <Grid container direction="row" justifyContent="center" alignItems="center" style={{ backgroundColor: "#14c3a2" }}>
+            <Grid container direction="row" justifyContent="center" alignItems="center" style={{ backgroundColor: "#fffffff8" }}>
                 <Grid alignItems="center" item xs={6}>
                     <Box paddingX={10} >
-                        <Typography variant="h3" gutterBottom color="textPrimary" component="h3" align="center" style={{ color: "white", fontWeight: "bold" }}>Compartilhe textos!</Typography>
-                        <Typography variant="h5" gutterBottom color="textPrimary" component="h5" align="center" style={{ color: "white", fontWeight: "bold" }}>expresse aqui os seus pensamentos e opiniões!</Typography>
+                        <Typography variant="h3" gutterBottom color="textPrimary" component="h3" align="center" style={{ color: "#438960", fontWeight: "bold" }}>Compartilhe Textos!</Typography>
+                        <Typography variant="h5" gutterBottom color="textPrimary" component="h5" align="center" style={{ color: "#438960", fontWeight: "bold" }}>Expresse aqui os seus pensamentos e opiniões! 😉</Typography>
                     </Box>
                     <Box display="flex" justifyContent="center">
                         <Box marginRight={1}>
                             <ModalPostagem />
                         </Box>
                         <Link to="/postagens" className="text-decoration-none">
-                        <Button variant="outlined" style={{ borderColor: "#595b5a", backgroundColor: "#7cf49a", color: "#595b5a" }}>
+                        <Button variant="outlined" style={{ borderColor: "#000000", backgroundColor: "#438960", color: "#fff9f9" }}>
                             Ver Postagens
                         </Button>
                         </Link>
