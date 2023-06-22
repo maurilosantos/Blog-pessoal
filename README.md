@@ -1,25 +1,23 @@
 # Plataforma Blog pessoal
 
-![desenvolvendo](https://img.shields.io/badge/Versão 1-desenvolvido-green)
+![desenvolvendo](https://img.shields.io/badge/Version1-desenvolvido-green)
 
-- [Back-End](https://github.com/maurilosantos/blogpessoal)
-
-#### Descrição
+### Descrição
 
 Esta é uma plataforma online onde você pode compartilhar suas ideias, pensamentos e experiências por meio de postagens em um blog pessoal. 
 
-#### Funções Principais
+### Funções Principais
 
 1. **Cadastro e Login**: Para começar, você precisa se cadastrar na plataforma fornecendo algumas informações básicas, como nome, endereço de e-mail e senha. Depois de se cadastrar, você será redirecionado para fazer login usando suas credenciais. (!!*Clique apenas uma vez para fazer a requisição de Cadastrar pois o backend pode demorar responder*!!)
 2. **Criação de Postagens**: Após fazer login, você terá a capacidade de criar, atualizar e deletar postagens no seu blog pessoal. Você poderá adicionar um título, conteúdo e uma tema para as postagens. 
 3. **Temas de Postagens**: A plataforma oferece uma variedade de temas predefinidos por outros usuários para suas postagens mas também poderá criar, atualizar e deletar as suas. 
 4. **Atualização de Perfil**: Você poderá personalizar seu perfil adicionando uma foto de perfil ou mudar informações como senha.
 
-#### Preview
+### Preview
 
 ![gifblog](https://raw.githubusercontent.com/maurilosantos/frontBlog/0e6c6634dec1beafbff58eabb4a606517cc2dd74/src/assets/gif-blog.gif)
 
-#### Tecnologias
+### Tecnologias
 
 Front-end: 
 
@@ -30,3 +28,9 @@ Front-end:
 Back-end: 
 
 <div align="center"> 	<code><img width="30" src="https://user-images.githubusercontent.com/25181517/192107858-fe19f043-c502-4009-8c47-476fc89718ad.png" alt="REST" title="REST"/></code> 	<code><img width="30" src="https://user-images.githubusercontent.com/25181517/117201156-9a724800-adec-11eb-9a9d-3cd0f67da4bc.png" alt="Java" title="Java"/></code> 	<code><img width="30" src="https://user-images.githubusercontent.com/25181517/117201470-f6d56780-adec-11eb-8f7c-e70e376cfd07.png" alt="Spring" title="Spring"/></code> 	<code><img width="30" src="https://user-images.githubusercontent.com/25181517/183891303-41f257f8-6b3d-487c-aa56-c497b880d0fb.png" alt="Spring Boot" title="Spring Boot"/></code> 	<code><img width="30" src="https://user-images.githubusercontent.com/25181517/183896128-ec99105a-ec1a-4d85-b08b-1aa1620b2046.png" alt="MySQL" title="MySQL"/></code> </div>
+
+### Como acessar
+
+Acesse aqui o deploy.
+
+[Back-End](https://github.com/maurilosantos/blogpessoal) da aplicação.
